@@ -1,0 +1,147 @@
+﻿1.Create a class that keeps track of the number of instances created. Implement a static variable and method to accomplish this ??
+Ans : public class StaticAssignment {
+        private static int instanceCount = 0;
+
+
+        public StaticAssignment() {
+                instanceCount++;
+        }
+
+
+        public static int getInstanceCount() {
+                return instanceCount;
+        }
+
+
+        public static void main(String[] args) {
+                StaticAssignment c1 = new StaticAssignment();
+                StaticAssignment c2 = new StaticAssignment();
+                StaticAssignment c3 = new StaticAssignment();
+                System.out.println("Number of instances created: " + StaticAssignment.getInstanceCount());
+        }
+}
+2.Write a program and create a constructor with parameters and initialise the variable using a constructor ??
+Ans :
+ import java.io.Externalizable;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+
+
+public class Person implements Externalizable {
+        private String name;
+        private int age;
+
+
+        public Person() {
+                // Default constructor required for externalization
+        }
+
+
+        public Person(String name, int age) {
+                this.name = name;
+                this.age = age;
+        }
+
+
+        @Override
+        public String toString() {
+                return "Person [name=" + name + ", age=" + age + "]";
+        }
+
+
+        @Override
+        public void writeExternal(ObjectOutput out) throws IOException {
+                out.writeObject(name);
+                out.writeObject(age);
+        }
+
+
+        @Override
+        public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+                name = (String) in.readObject();
+        }
+
+
+        public static void main(String[] args) throws IOException, ClassNotFoundException {
+                Person p1 = new Person("John", 30);
+
+
+                // Write object to file
+                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("person.ser"));
+                oos.writeObject(p1);
+                oos.close();
+
+
+                // Read object from file
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("person.ser"));
+                Person p2 = (Person) ois.readObject();
+                ois.close();
+
+
+                System.out.println("Original object: " + p1);
+                System.out.println("Deserialized object: " + p2);
+        }
+
+
+}
+3.Use a private keyword for a variable and use setter and getter methods to initialise and print the values ??
+Ans : 
+public class Encapsulation {
+        // instance variables
+        private String name;
+        private int age;
+
+
+        // constructor with parameters
+        public Encapsulation(String name, int age) {
+                this.name = name;
+                this.age = age;
+        }
+
+
+        public String getName() {
+                return name;
+        }
+
+
+        public int getAge() {
+                return age;
+        }
+
+
+}
+
+
+class Main {
+        public static void main(String[] args) {
+
+
+                Encapsulation person1 = new Encapsulation("John Doe", 25);
+
+
+                // accessing instance variables
+                System.out.println(person1.getName());
+                System.out.println(person1.getAge());
+        }
+}
+4.Write a program to call a method without creating an object of a class ??
+Ans : 
+public class StaticMethod {
+
+
+        public static void run() {
+                System.out.println("Static method");
+        }
+
+
+        public static void main(String[] args) {
+                StaticMethod.run();
+        }
+}
+5.Write a program which has static block and constructor overloading,initialise variables using constructors and print it ??
+Ans :
